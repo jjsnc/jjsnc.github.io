@@ -1,3 +1,7 @@
-.post-content {
-  color: #000000
+.entry-content {
+  color: #000000;
+}
+
+.entry-content a {
+  color: #1a0dab;
 }

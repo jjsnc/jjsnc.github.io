@@ -5,6 +5,8 @@ date: 2025-09-08
 author: Jason Chan
 ---
 
+My first blog post! And what is cybersecurity?
+
 First post of the blog, will be testing how posts work with this post, but in the main time...
 
 Let's cover what cybersecurity is at a general level.

@@ -1,9 +1,8 @@
-
-
 ---
 layout: post
 title: My First Post and Cybersecurity
 date: 2025-09-08
+author: Jason Chan
 ---
 
 First post of the blog, will be testing how posts work with this post, but in the main time...

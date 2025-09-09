@@ -18,3 +18,5 @@ title: Home
   {% endfor %}
 </ul>
 
+
+## Projects

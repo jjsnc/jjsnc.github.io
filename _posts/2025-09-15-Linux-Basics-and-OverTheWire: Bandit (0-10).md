@@ -13,17 +13,18 @@ The first few levels were quite easy, as I already had some sort of basic Linux 
 
 <h4>[Level 1]</h4> Linux has special characters, for example, "-" is one of them. To open a file named "-", you would have to use cat "./-". This specifies that you want to open the file called "-" in the current directory.
 
-<h4>[Level 2]</h4> To open files with spaces in their name, you have to use "\", which is an escape character. For example, if you wanted to open a file like "open this", you would need cat ./open\ this. However, I instinctively pressed tab to autofill (tab completion) the file name, allowing me to pass this level.
+<h4>[Level 2]</h4> To open files with spaces in their name, you have to use "`\`", which is an escape character. For example, if you wanted to open a file like "open this", you would need cat ./open\ this. However, I instinctively pressed tab to autofill (tab completion) the file name, allowing me to pass this level.
 
 <h4>[Level 3]</h4> Use ls with the -a flag to find hidden files. Hidden files begin with a "." in front of the file names. For example, to create a hidden file, you would use touch .not\ hidden. - This creates a hidden file called not hidden.
 
-![Hidden Example](/images/HiddenExample.png)
+![Creating a Hidden File](/images/CreatingHidden.png)<br>
+*Creating a new Hidden File and using ls -a* <br>
 
 <h4>[Level 4]</h4> Use file [filename] to determine the file type of a certain file. This can be used to sort files from generic "gibberish" files. For example, we can differentiate files with ASCII encodings and files with just data.
 
 ![File Example](/images/FileExample.png)
 
-<h4>[Level 5]</h4> Since we knew the file size (1033 bytes), I used find with the size flag: find -size 1033c. The c at the end represents bytes. The official documentation has it as find -size n[cwbkMG]. n can be -n or +n to find files with fewer or greater than n bytes, respectively (c), two-byte word (w), 512-byte block (b), kilobytes (k), megabytes (M), and gigabytes (G). However, there are also other ways to pass this level. For example, in the description, it stated that the file cannot be executed, and thus we can use find -type f ! -executable. This command finds a type file that is not executable. ! is like a negation.
+<h4>[Level 5]</h4> Since we knew the file size (1033 bytes), I used find with the size flag: find -size 1033c. The c at the end represents bytes. The official documentation has it as find -size n[cwbkMG]. n can be -n or +n to find files with fewer or greater than n bytes (c), respectively, two-byte word (w), 512-byte block (b), kilobytes (k), megabytes (M), and gigabytes (G). However, there are also other ways to pass this level. For example, in the description, it stated that the file cannot be executed, and thus we can use find -type f ! -executable. This command finds a type file that is not executable. ! is like a negation.
 
 <h4>[Level 6]</h4> To find files owned by a specific user, we use find -user [username]. To find files owned by a specific group, we use find -group [groupname]. This originally stumped me. I thought we had to find things related to permissions. I personally did find -perm -g=w (to match any group with write permissions) and then realized I had to find files owned by a certain user, group, and was 33 bytes. Combining all of these, I did find -user bandit7 -group bandit6 -size 33c.
 

@@ -22,7 +22,8 @@ The first few levels were quite easy, as I already had some sort of basic Linux 
 
 <h4>[Level 4]</h4> Use file [filename] to determine the file type of a certain file. This can be used to sort files from generic "gibberish" files. For example, we can differentiate files with ASCII encodings and files with just data.
 
-![File Example](/images/FileExample.png)
+![File Example](/images/FileExample.png)<br>
+*Using file to identify the content that files hold*
 
 <h4>[Level 5]</h4> Since we knew the file size (1033 bytes), I used find with the size flag: find -size 1033c. The c at the end represents bytes. The official documentation has it as find -size n[cwbkMG]. n can be -n or +n to find files with fewer or greater than n bytes (c), respectively, two-byte word (w), 512-byte block (b), kilobytes (k), megabytes (M), and gigabytes (G). However, there are also other ways to pass this level. For example, in the description, it stated that the file cannot be executed, and thus we can use find -type f ! -executable. This command finds a type file that is not executable. ! is like a negation.
 

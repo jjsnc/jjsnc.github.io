@@ -30,20 +30,20 @@ The first few levels were quite easy, as I already had some sort of basic Linux 
 -To find certain patterns/words, use grep [flag/option] pattern [filename]. For example, to find the word "hello" in a bunch of gibberish in a file called bye.txt, we would do grep -n "hello" bye.txt. [Level 7]
 
 -Piping and Redirecting. This was definitely tougher to understand. There are many operations (>, <, |, >>, etc.). I will cover the basics here.
-1. > : This is an output redirection; it basically routes the output of a command into a file. For example, ls > list. > is read by the terminal first, and then the file called list is created (if it doesn't exist). Next, we run the ls command, which then sees everything in the current directory (and list). The results are then transferred into the list file.
-2. < : This is an input redirection, the opposite of output redirection. Basically, when you use <, you are feeding a file to a command. For example, sort < file.txt would read from file.txt and sort it. However, the existing file.txt will not be changed because sort prints out the STDOUT (the terminal) normally.
-3. | : Piping basically feeds the output of the left program as input to the right program. For example, sort data.txt | uniq means to sort data.txt and then feed that sorted text file into the uniq command, which gets rid of consecutive unique duplicates.
-4. >> : Like output redirection, HOWEVER, instead of overwriting, it APPENDS.
-5. All of these operations can be nested.
+1) > : This is an output redirection; it basically routes the output of a command into a file. For example, ls > list. > is read by the terminal first, and then the file called list is created (if it doesn't exist). Next, we run the ls command, which then sees everything in the current directory (and list). The results are then transferred into the list file.
+2) < : This is an input redirection, the opposite of output redirection. Basically, when you use <, you are feeding a file to a command. For example, sort < file.txt would read from file.txt and sort it. However, the existing file.txt will not be changed because sort prints out the STDOUT (the terminal) normally.
+3) | : Piping basically feeds the output of the left program as input to the right program. For example, sort data.txt | uniq means to sort data.txt and then feed that sorted text file into the uniq command, which gets rid of consecutive unique duplicates.
+4) >> : Like output redirection, HOWEVER, instead of overwriting, it APPENDS.
+5) All of these operations can be nested.
 
 ![Nested Example](../images/nestedExample.png)
 *Credit to [Link](https://ryanstutorials.net/linuxtutorial/piping.php)*
 
 So what is happening in the picture above?
-1. We redirect the contents of barry.txt into STDIN and feed it into wc -l.
-2. wc -l counts the # of lines in barry.txt, which gives us 7.
-3. The number 7 is then used with the output redirection >, routing it to myoutput.
-4. Printing myoutput resulted in 7.
+1) We redirect the contents of barry.txt into STDIN and feed it into wc -l.
+2) wc -l counts the # of lines in barry.txt, which gives us 7.
+3) The number 7 is then used with the output redirection >, routing it to myoutput.
+4) Printing myoutput resulted in 7.
 
 All of this was learned to solve Level 8, where we had to find the password in a file filled with duplicates. What I did was sort data.txt | uniq -c | grep “ 1 “. So first, I sorted data.txt to make sure everything was in order (including duplicates). This was to make sure that uniq -c can count duplicates (it only counts consecutive duplicates). The flag - c prefixes each line with how many duplicates there are in the file. We used this because even after sorting, all duplicates should be consecutive or next to each other, allowing uniq -c to effectively count. Then we used grep " 1 " to find the unique password in the file. [Level 8]
 

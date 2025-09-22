@@ -32,7 +32,7 @@ Now, since `tr` uses STDIN, we must feed something into STDIN to get an output. 
 <h4>[Level 12]</h4>
 Cool level that deals with decompressing and extracting files. We are given a hexdump that has been compressed several times. But before that, we need to create a space where we can work.
 
-OverTheWire suggests creating a temporary file inside `tmp`. We can do this by navigating to `tmp` and manually doing `mkdir`, or we can use the `mktemp -d` command to create a unique randomly named directory in tmp.
+OverTheWire suggests creating a temporary file inside `tmp`. We can do this by navigating to `tmp` and manually doing `mkdir`, or we can use the `mktemp -d` command to create a unique, randomly named directory in tmp.
 
 Now, after creating a temporary directory, we need to reverse the hexdump given to us. Luckily, there exists a command to do just that.
 

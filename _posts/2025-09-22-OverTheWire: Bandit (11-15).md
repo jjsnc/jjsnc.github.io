@@ -7,22 +7,25 @@ author: Jason Chan
 
 I have decided to complete OverTheWire Bandit Levels 11-15 to learn more about Linux commands and networking. I will complete TryHackMe's Linux Fundamentals next week to solidify my Linux foundations. Anyways, onto the levels!
 
-<h4>[Level 11]</h4>
+#### [Level 11]
 What we had was basically a text file that was encrypted with ROT13. ROT13 is a simple substitution cipher; basically, you rotate/shift each letter in the alphabet 13 places. A<->N, B<->O, M<->Z, etc.
 To find the password, we have to somehow rotate and shift the letters by 13 again (this would reverse the ROT13 encryption) since the alphabet has 26 letters and was already shifted 13 places by the initial ROT13 encryption.
 <br>
 
-```tr [ -cds ] [ string1 [ string2 ] ]```
+```markdown 
+tr [ -cds ] [ string1 [ string2 ] ]
+```
 
 This command is essential in solving this level. `tr` is used to translate or delete characters, specifically, in this use case, you could translate letters found in `string1` to corresponding letters found in `string2`.
 
 For ROT13, the `tr` command to rotate 13 places is `tr 'A-Za-z' 'N-ZA-Mn-za-m'`.
 
-For all letters in `string1`, we map them onto `string2`. So, the first string encases all letters (uppercase and lowercase), and the second string does the mapping. So for all letters in A-Za-z that we find in STDIN, map them onto N-ZA-Mn-za-m. All uppercases would be mapped to N-ZA-M, so A->N, M->Z, N->A, Z->M. The same is applied to lowercase letters with the same logic. I know this is pretty confusing, but here is a little representation of what is happening.
+For all letters in `string1`, we map them onto `string2`. So, the first string encases all letters (uppercase and lowercase), and the second string does the mapping. So for all letters in A-Za-z that we find in STDIN, map them onto N-ZA-Mn-za-m. All uppercases would be mapped to N-ZA-M, so A->N, M->Z, N->A, Z->M. The same is applied to lowercase letters with the same logic. I know this is pretty confusing, but here is a little representation of what is happening. Below is an example of the mapping, before and after ROT13.
 
-`ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz` <br>
-`NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm` <br>
-*mapping of the letters*
+```markdown
+ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm
+```
 
 Now, since `tr` uses STDIN, we must feed something into STDIN to get an output. In this case, I used echo with piping to solve this level.
 
@@ -36,7 +39,9 @@ OverTheWire suggests creating a temporary file inside `tmp`. We can do this by n
 
 Now, after creating a temporary directory, we need to reverse the hexdump given to us. Luckily, there exists a command to do just that.
 
-`xxd -r [filename]`
+```markdown
+xxd -r [filename]
+```
 
 The `xxd` command creates a hex dump or reverses it.
 
@@ -56,10 +61,12 @@ The `xxd` command creates a hex dump or reverses it.
 *Further decompression reveals a `tar` file*
 
 ![Extracting TAR](/images/6-LVL12.png)<br>
-`tar -xvf [filename]` was used to extract the `tar` archive. <br>
-`-x` extracts the file from the archive. <br>
-`-v` lists the file extracted. <br>
-`-f` defines the tar archive to extract from. <br>
+```markdown
+tar -xvf [filename] was used to extract the `tar` archive.
+-x extracts the file from the archive.
+-v lists the file extracted. 
+-f defines the tar archive to extract from.
+```
 
 ![Finale](/images/7-LVL12.png)<br>
 *After extracting and decompressing, we finally end up with `data8.bin`, a gzip compressed file, which was then decompressed with `zcat`*
@@ -67,7 +74,9 @@ The `xxd` command creates a hex dump or reverses it.
 <h4>[Level 13]</h4>
 In this level, we are given a private SSH key and tasked with getting into level 14. This was relatively simple.
 
-`ssh -p 2220 -i [SSH Key Location] username@hostname`
+```markdown
+ssh -p 2220 -i [SSH Key Location] username@hostname
+```
 
 We know previously that `-p` indicates the port to connect to. By adding the `-i` flag, we indicate a file (private key) to use with the `ssh` command.
 
@@ -78,7 +87,9 @@ Using `ssh` will result in a connection refused error message. This is because t
 
 To bypass this, we need to talk to the TCP/UDP ports directly. We can do this with the `nc` or `netcat` command. We basically opened a pipe to another computer's port, allowing us to send raw bytes over.
 
-`nc [options] hostname port`
+```markdown
+nc [options] hostname port
+```
 
 One option that I discovered that was useful in determining if the connection was successful was `-v`, which prints out the result of `nc`.
 
@@ -104,7 +115,9 @@ The interaction between the client and server is usually done in a TLS handshake
 
 Now, to open a secure communications channel, we have to use the `openssl` command.
 
-`openssl command [ options ... ] [ parameters ... ]`
+```markdown
+openssl command [ options ... ] [ parameters ... ]
+```
 
 ![OpenSSL cmd demo](/images/LVL15New.png)<br>
 *Using the `openssl` command to connect securely*

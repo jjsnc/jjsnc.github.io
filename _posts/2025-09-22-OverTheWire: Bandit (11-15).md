@@ -10,9 +10,9 @@ I have decided to complete OverTheWire Bandit Levels 11-15 to learn more about L
 <h4>[Level 11]</h4>
 What we had was basically a text file that was encrypted with ROT13. ROT13 is a simple substitution cipher; basically, you rotate/shift each letter in the alphabet 13 places. A<->N, B<->O, M<->Z, etc.
 To find the password, we have to somehow rotate and shift the letters by 13 again (this would reverse the ROT13 encryption) since the alphabet has 26 letters and was already shifted 13 places by the initial ROT13 encryption.
-<br><br>
-  
-`tr [ -cds ] [ string1 [ string2 ] ]`
+<br>
+
+```tr [ -cds ] [ string1 [ string2 ] ]```
 
 This command is essential in solving this level. `tr` is used to translate or delete characters, specifically, in this use case, you could translate letters found in `string1` to corresponding letters found in `string2`.
 

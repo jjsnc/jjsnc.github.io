@@ -62,7 +62,7 @@ The `xxd` command creates a hex dump or reverses it.
 
 ![Extracting TAR](/images/6-LVL12.png)<br>
 ```markdown
-tar -xvf [filename] was used to extract the `tar` archive.
+tar -xvf [filename] was used to extract the tar archive.
 -x extracts the file from the archive.
 -v lists the file extracted. 
 -f defines the tar archive to extract from.

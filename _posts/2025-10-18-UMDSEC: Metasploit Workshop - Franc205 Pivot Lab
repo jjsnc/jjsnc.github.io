@@ -1,0 +1,51 @@
+---
+layout: post
+title: "UMDSEC: Metasploit Workshop - Franc205 Pivot Lab"
+date: 2025-10-18
+author: Jason Chan
+---
+
+During this week's cybersecurity club meeting (UMDSEC), we looked over the basics of pentesting and reviewed tools, such as `nmap` and `metasploit`. I already have some experience with using `nmap`, but the meeting delved deeper, and more importantly, it went over `metasploit`, a very versatile exploitation framework, which I have no experience working with.
+
+So yeah, this blog will basically be me tackling an exercise found in [UMDSEC's metasploit workshop](https://github.com/CSEC-President/csec-msf-workshop) in attempts to familiarize myself with `metasploit`.
+
+The [exercise](https://github.com/franc205/pivoting-lab) is about `pivoting` - when an attacker uses one compromised system to `pivot` or to move across to another system that they couldn't reach directly.
+
+Anyways, the setup's fairly simple, just follow the guide in the exercise. Once you have finished the setup, check that the Docker containers are running by running `docker ps`. If that doesn't work due to a lack of permissions, run `sudo docker ps`, in which case, you should see 10 containers.
+
+After that, we can finally start by sshing into the attacker's pc - `ssh -p 2222 root@127.0.0.1` with `toor` as password.
+
+This scenario assumes that we have already compromised another user's pc, `Jerry-PC`, and thus have all the credentials to get initial access into the target network.
+
+```markdown
+ssh root@192.168.10.3
+User: root
+Password: IAmJerry
+```
+
+We can then perform basic network reconnaissance with ifconfig to determine what `Jerry-PC` can connect to.
+
+![ifconfig results](/images/UMDSEC%3A%20Metasploit%20Pivot1/ifconfig.png)
+
+Here, we see our own IP Address, `192.168.10.3`, with a subnet mask of `255.255.255.0`. This means a network of `/24`, 24 bits dedicated to the network, and 8 to hosts. This means the range of our IP Address for this subnet encompasses `192.168.10.[1-254]`, 192.168.10.0 and 192.168.10.255 are reserved for network address and broadcast address, respectively.
+
+Additionally, we see that `Jerry-PC` has an open connection to `192.168.11.2`
+
+---- continue with ping sweeping/copy tools from attack to jerry pc and use nmap -sn.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

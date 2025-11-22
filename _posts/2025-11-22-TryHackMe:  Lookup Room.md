@@ -62,10 +62,10 @@ Unfortunately, we do not find any hidden directories - index.php is the home pag
 
 Let's just play with the site. Since we have a login page, the most obvious thing to do is... try and login with default admin usernames/passwords.
 
-![admin](/images/THM%3A%20Lookup/admin.png)
+![admin](/images/THM%3A%20Lookup/admin.png) <br>
 *Using admin for both username and password*
 
-![guest](/images/THM%3A%20Lookup/guest.png)
+![guest](/images/THM%3A%20Lookup/guest.png) <br>
 *Using guest for both username and password*
 
 It seems like the website has a user enumeration vulnerability. It confirms whether we have the correct username or not, even with the wrong password. This gives us a chance to brute-force the login, which can be done with `hydra`.
@@ -162,7 +162,7 @@ set LHOST <your ip address> -> can be viewed with ifconfig (under tun0)
 
 After selecting the exploit to use and setting RHOSTS and LHOST, we run it with `run`.
 
-![after run](/images/THM%3A%20Lookup/ran.png)
+![after run](/images/THM%3A%20Lookup/ran.png) <br>
 *After running, we get a Meterpreter session. In this session, I ran sysinfo and getuid.*
 
 We can get a "shell" by running the shell in Meterpreter.
@@ -171,23 +171,23 @@ We can get a "shell" by running the shell in Meterpreter.
 
 After moving around, we eventually find a few things in the home directory.
 
-![home](/images/THM%3A%20Lookup/home.png)
+![home](/images/THM%3A%20Lookup/home.png) <br>
 *Note the fact that user `think` has a file called .passwords*
 
 We find user.txt in /think, however, we cannot access it. We need to escalate our privileges. This can be done with `linPEAS`. First, we need to upload linPEAS to our target machine. This can be easily done by exiting the shell with `exit`, and then doing `upload [source] [destination]` inside meterpreter.
 
-![uploading linPEAS](/images/THM%3A%20Lookup/upload.png)
+![uploading linPEAS](/images/THM%3A%20Lookup/upload.png) <br>
 *We upload into /tmp because /tmp usually has write perms for everyone*
 
 After that, we run `linPEAS`, but we will be denied due to insufficient permissions. However, since we are the user who created/uploaded the file, we are allowed to run `chmod +x /tmp/linpeas.sh`, which grants us the ability to execute `linPEAS`. `linPEAS` delivers a ton of information; however, since we are focused on escalating our privileges, we focus on `SUID`.
 
 ![result of linPEAS](/images/THM%3A%20Lookup/linpeas1.png)
-![zoomed in](/images/THM%3A%20Lookup/linpeas2.png)
+![zoomed in](/images/THM%3A%20Lookup/linpeas2.png) <br>
 *We find an unknown SUID - /usr/sbin/pwn we could probably exploit*
 
 We go to /usr/sbin/pwn and execute it to see what it does.
 
-![pwn](/images/THM%3A%20Lookup/execute.png)
+![pwn](/images/THM%3A%20Lookup/execute.png) <br>
 *It runs the id command and then tries to find the password file for that user*
 
 We know that the user `think` has a file called passwords (it was a hidden file).
@@ -217,10 +217,10 @@ It is basically a script that runs the `echo` and `chmod` commands.
 
 And then, when we run `pwm`, we need to make sure our new `id` command is ran by prepending /tmp to $PATH.
 
-![path](/images/THM%3A%20Lookup/path.png)
+![path](/images/THM%3A%20Lookup/path.png) <br>
 *Notice how it is structured, it goes into /usr/local/sbin, then /usr/local/bin, and then /usr/sbin, etc.*
 
-![path manipulation](/images/THM%3A%20Lookup/pathmanipulation.png)
+![path manipulation](/images/THM%3A%20Lookup/pathmanipulation.png) <br>
 *We prepended /tmp to $PATH - this means the executable `pwn` will go to /tmp first and then look for the executable `id` instead of other places where it is normally found.*
 
 After executing our version of `id`, we get into the password file under the user `think` and we get the password (josemario.AKA(think)).
@@ -232,7 +232,7 @@ su <user>
 Basically means to switch users, switch to <user>
 ```
 
-![logging in as think](/images/THM%3A%20Lookup/loggedin.png)
+![logging in as think](/images/THM%3A%20Lookup/loggedin.png) <br>
 *As you can see, we are in as think*
 
 Now, as the user `think`, we can access `user.txt` to solve a part of the room. The next step is to get root access.

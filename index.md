@@ -24,7 +24,7 @@ title: Home
     <li>
       {{ ctf.name }} - {{ ctf.date | date: "%b %d, %Y" }}
       {% if ctf.focus %}
-        <span style="font-size: 0.85em;">Focus: {{ ctf.focus | join: ", " }}</span>
+        <br><span style="font-size: 0.85em;">Focus: {{ ctf.focus | join: ", " }}</span>
       {% endif %}
     </li>
   {% endfor %}

@@ -23,7 +23,9 @@ title: Home
   {% for ctf in site.data.ctfs %}
     <li>
       {{ ctf.name }} - {{ ctf.date | date: "%b %d, %Y" }}
-      {% if ctf.focus %}<br>Focus: {{ ctf.focus | join: ", " }}{% endif %}
+      {% if ctf.focus %}
+        <span style="font-size: 0.85em;">Focus: {{ ctf.focus | join: ", " }}</span>
+      {% endif %}
     </li>
   {% endfor %}
 </ul>

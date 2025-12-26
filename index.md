@@ -18,4 +18,14 @@ title: Home
 </ul>
 
 
+## CTFs
+<ul>
+  {% for ctf in site.data.ctfs %}
+    <li>
+      <strong>{{ ctf.name }}</strong> — {{ ctf.date | date: "%B %Y" }}
+      {% if ctf.focus %}<br><em>Focus:</em> {{ ctf.focus | join: ", " }}{% endif %}
+    </li>
+  {% endfor %}
+</ul>
+
 ## Projects

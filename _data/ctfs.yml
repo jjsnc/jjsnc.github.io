@@ -1,10 +1,10 @@
 - name: BuckeyeCTF 2025
-  date: 2025-11
+  date: 2025-11-07
   focus:
     - Web
     - Reverse Engineering
     - Crypto
 - name: "Haunted Pumpkin CTF '25"
-  date: 2025-10
+  date: 2025-10-31
   focus:
     - OSINT

@@ -3,7 +3,7 @@ layout: default
 title: Home
 ---
 
-# Welcome to My Cybersecurity Journal
+# What have I been up to lately...
 
 ---
 

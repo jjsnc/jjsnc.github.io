@@ -31,3 +31,13 @@ title: Home
 </ul>
 
 ## Projects
+
+<ul>
+  {% for project in site.data.projects %}
+    <li>
+      <a href="{{ project.url }}">{{ project.name }}</a> - {{ project.range }}
+    </li>
+  {% endfor %}
+</ul>
+
+

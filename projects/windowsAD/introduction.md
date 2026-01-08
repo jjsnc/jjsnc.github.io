@@ -19,7 +19,7 @@ What exactly is Active Directory (AD)? Well, it is a service offered by Microsof
 
 Installation and setting up the server is pretty simple - just follow through the installation process. You might have trouble booting up initially because the SATA drives do not find your ISO file. In this case, you have to go into the VM settings, and then you have to set SATA to point to ISO and check "Connect at Power On".
 
-![VM Settings](/images/Proj%3A%20AD/settings.png) <br>
+![VM Settings](/images/Proj%3A%20AD/vmsettings.png) <br>
 *Edit VM Settings -> CD/DVD (SATA) -> Select ISO file and check Connect at Power On*
 
 ## Some stuff to keep in mind

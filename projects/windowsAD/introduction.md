@@ -22,7 +22,7 @@ Installation and setting up the server is pretty simple - just follow through th
 ![VM Settings](/images/Proj%3A%20AD/settings.png) <br>
 *Edit VM Settings -> CD/DVD (SATA) -> Select ISO file and check Connect at Power On*
 
-### Some stuff to keep in mind
+## Some stuff to keep in mind
 
 You only need to download one Windows 11 Enterprise ISO file -> this file can then be used to create multiple VMs to simulate multiple users.
 

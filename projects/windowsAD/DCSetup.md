@@ -55,6 +55,30 @@ We can skip DNS delegation since our server/DC is authoritative -> this means al
 
 Restart the server, and you have a functioning domain controller.
 
+## Checking The Server
+
+After you have restarted, to check if Active Directory was successfully installed, in Server Manager, you should see an option for `AD DS` and `DNS`. For example, in the picture below:
+
+
+![example that shows AD DS and DNS](/images/Proj%3A%20AD/check.png) <br>
+*On the left side of Server Manager, you should see AD DS and DNS*
+
+Additionally, you can check if `DNS` is up and running by going into `services.msc`.
+
+![services.msc picture](/images/Proj%3A%20AD/dnscheck.png) <br>
+*From the image, our machine is running as a DNS server*
+
+We can also check `DNS` by using the `nslookup` command in the command prompt. Simply open the command prompt, type in `nslookup`, and then query for your forest name.
+
+![nslookup](/images/Proj%3A%20AD/dnscheck2.png) <br>
+*In my case, after typing in nslookup, I queried my forest name, which was jasonCorp.local*
+
+It might look weird, especially if `nslookup` returned Default Server: Unknown and Address: ::1, however, that is fine - loopback addresses (::1 basically means 127.0.0.1) typically do not have a reverse DNS (PTR) record. However, forward DNS queries should succeed - typing in your forest (domain) name should give you the server's static IP address. Additionally, you could also do `nslookup` Google.com to test if `DNS` is resolving or not.
+
+Please check that your `DNS` works - AD heavily relies on `DNS`, your clients may not be able to find the domain controller within the network if `DNS` does not work, which means they cannot join the domain.
+
+
+
 
 
 

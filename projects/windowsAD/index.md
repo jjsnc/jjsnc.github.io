@@ -6,8 +6,8 @@ author: Jason Chan
 # Windows Active Directory (AD) Lab
 Project will be broken up into subparts:
 
-Introduction: What will be required for the lab, what even is AD, etc.
-Server Setup: Configuring our Windows Server 2022 into an AD+DNS Server, and configuring a static IP address.
+Introduction: What will be required for the lab, what even is AD, etc. <br>
+Server Setup: Configuring our Windows Server 2022 into an AD+DNS Server, and configuring a static IP address. <br>
 User/Client Setup: Reassign DNS for workstations to point to AD+DNS Server, creating new users within ADUC, joining the domain as new users, and logging into the domain.
 
 ## Subparts (UNDER CONSTRUCTION)

@@ -10,6 +10,7 @@ author: Jason Chan
 Within the AD+DNS Windows Server 2022 VM, you can open up `Active Directory Users and Computers (ADUC)` by searching for it in the start menu, or by accessing it through Server Manager.
 
 ![ADUC](/images/Proj%3A%20AD/ADUC.png) <br>
+*Accessing through Server Manager*
 
 Within `ADUC`, you should see something along the lines of:
 

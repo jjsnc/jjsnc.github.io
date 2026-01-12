@@ -1,0 +1,13 @@
+img {
+  display: block;
+  max-width: 100%;
+  margin: 1em auto;
+  transition: transform 0.25s ease;
+  cursor: zoom-in;
+}
+
+img:hover {
+  transform: scale(1.4);
+  position: relative;
+  z-index: 10;
+}

@@ -18,7 +18,7 @@ title: Home
 </ul>
 
 
-## CTFs
+## CTFs (under construction, will probably change to posts about specific writeups)
 <ul>
   {% for ctf in site.data.ctfs %}
     <li>

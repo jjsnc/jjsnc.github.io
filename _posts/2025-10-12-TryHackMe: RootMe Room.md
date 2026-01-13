@@ -50,12 +50,14 @@ I think /panel stands out the most, since to me, it's like synonymous with admin
 
 Visiting `http://10.201.124.246/panel/` gave me a panel that prompts me to upload a file. I think whatever we upload could be seen in /uploads.
 
-![panel error](/images/THM%3A%20RootMe/panelerror.png) <br>
+![panel error](/images/THM%3A%20RootMe/panelerror.png)
+
 *Error happened when I clicked upload without selecting a file*
 
 Since I could upload a file - why not?
 
-![doggo pic uploaded](/images/THM%3A%20RootMe/panelsuccess.png) <br>
+![doggo pic uploaded](/images/THM%3A%20RootMe/panelsuccess.png)
+
 *Successfully uploaded doggo.png*
 
 After uploading the picture, I went to /uploads to see if my picture was there...
@@ -68,13 +70,16 @@ Anyways, apart from this tomfoolery, being able to upload files willy-nilly onto
 
 Now, let's go back and view what /css and /js had in store before moving on.
 
-![what /css had](/images/THM%3A%20RootMe/css.png) <br>
+![what /css had](/images/THM%3A%20RootMe/css.png)
+
 *CSS directory, nothing too notable*
 
-![what /js had](/images/THM%3A%20RootMe/js.png) <br>
+![what /js had](/images/THM%3A%20RootMe/js.png)
+
 *JS directory, also nothing notable*
 
-![function in /js](/images/THM%3A%20RootMe/function.png) <br>
+![function in /js](/images/THM%3A%20RootMe/function.png)
+
 *Function found in js directory, maybe we could exploit something here, but it feels like the function is served more as an aesthetic*
 
 Anyways, back to /panel - seems most likely exploitable and thus highest priority. We could maybe upload a file, like a script, to execute things on our behalf? For example, like a bash file?

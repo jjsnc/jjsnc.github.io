@@ -43,7 +43,7 @@ sudo sh -c "echo 10.201.98.188 lookup.thm" >> /etc/hosts
 * >> basically appends the result of the echo into /etc/hosts
 ```
 
-Now that we told our computer to associate the ip address with lookup.thm, we can now access the site.
+Now that we have told our computer to associate the IP address with lookup.thm, we can now access the site.
 
 ![site](/images/THM%3A%20Lookup/site.png)
 
@@ -58,14 +58,16 @@ dir indicates directory bruteforcing mode; there are many different modes
 * -w [wordlist] indicates what wordlist you would bruteforce with
 ```
 
-Unfortunately, we do not find any hidden directories - index.php is the home page, we can ignore that.
+Unfortunately, we do not find any hidden directories - index.php is the home page, so we can ignore that.
 
-Let's just play with the site. Since we have a login page, the most obvious thing to do is... try and login with default admin usernames/passwords.
+Let's just play with the site. Since we have a login page, the most obvious thing to do is... try and log in with default admin usernames/passwords.
 
-![admin](/images/THM%3A%20Lookup/admin.png) <br>
+![admin](/images/THM%3A%20Lookup/admin.png)
+
 *Using admin for both username and password*
 
-![guest](/images/THM%3A%20Lookup/guest.png) <br>
+![guest](/images/THM%3A%20Lookup/guest.png) 
+
 *Using guest for both username and password*
 
 It seems like the website has a user enumeration vulnerability. It confirms whether we have the correct username or not, even with the wrong password. This gives us a chance to brute-force the login, which can be done with `hydra`.
@@ -90,10 +92,10 @@ lookup.thm http-post-form "/login.php:username=^USER^&password=^PASS^:F=Wrong pa
 * <target> hostname -> lookup.thm
 * http-post-form -> specific hydra module to use (targeting logins with POST)
 * "quoted string" -> module arguments, username, and password fields
-* :F=Wrong password -> Error message that hydra looks for to continue with the brute-force
+* :F=Wrong password -> Error message that Hydra looks for to continue with the brute-force
 * -f -> exits hydra on first success
 * -v -> verbose, print out what it's doing
-* -t [num] -> tells how many threads hydra can use
+* -t [num] -> tells how many threads Hydra can use
 ```
 
 We get a hit, password123. However, it doesn't work when we try to log in with that information.
@@ -114,9 +116,9 @@ lookup.thm http-post-form "/login.php:username=^USER^&password=^PASS^:F=Wrong us
 * <target> hostname -> lookup.thm
 * http-post-form -> specific hydra module to use (targeting logins with POST)
 * "quoted string" -> module arguments, username, and password fields
-* :F=Wrong password -> Error message that hydra looks for to continue with the brute-force
+* :F=Wrong password -> Error message that Hydra looks for to continue with the brute-force
 * -v -> verbose, print out what it's doing
-* -t [num] -> tells how many threads hydra can use
+* -t [num] -> tells how many threads Hydra can use
 ```
 
 So what has changed for our `hydra` inputs? Well, we are using a username list now and one specific password. We also changed the error message for `hydra` to catch. If `hydra` catches a "Wrong username or password", it will continue; however, if we get a valid username, `hydra` will exit because the error message would be "Wrong password".
@@ -144,7 +146,7 @@ Browsing around, we see the version of elFinder.
 
 ![version](/images/THM%3A%20Lookup/vers.png)
 
-This is important because, depending on the service version, we can see if any known exploits have yet to be patched. This can be done with `metasploit`, a very powerful framework that basically has a database of exploits that can be ran.
+This is important because, depending on the service version, we can see if any known exploits have yet to be patched. This can be done with `metasploit`, a very powerful framework that basically has a database of exploits that can be run.
 
 Open `metasploit` with msfconsole. After that, we search for elFinder 2.1.47.
 
@@ -162,7 +164,8 @@ set LHOST <your ip address> -> can be viewed with ifconfig (under tun0)
 
 After selecting the exploit to use and setting RHOSTS and LHOST, we run it with `run`.
 
-![after run](/images/THM%3A%20Lookup/ran.png) <br>
+![after run](/images/THM%3A%20Lookup/ran.png)
+
 *After running, we get a Meterpreter session. In this session, I ran sysinfo and getuid.*
 
 We can get a "shell" by running the shell in Meterpreter.
@@ -171,23 +174,27 @@ We can get a "shell" by running the shell in Meterpreter.
 
 After moving around, we eventually find a few things in the home directory.
 
-![home](/images/THM%3A%20Lookup/home.png) <br>
+![home](/images/THM%3A%20Lookup/home.png)
+
 *Note the fact that user `think` has a file called .passwords*
 
 We find user.txt in /think, however, we cannot access it. We need to escalate our privileges. This can be done with `linPEAS`. First, we need to upload linPEAS to our target machine. This can be easily done by exiting the shell with `exit`, and then doing `upload [source] [destination]` inside meterpreter.
 
-![uploading linPEAS](/images/THM%3A%20Lookup/upload.png) <br>
+![uploading linPEAS](/images/THM%3A%20Lookup/upload.png)
+
 *We upload into /tmp because /tmp usually has write perms for everyone*
 
 After that, we run `linPEAS`, but we will be denied due to insufficient permissions. However, since we are the user who created/uploaded the file, we are allowed to run `chmod +x /tmp/linpeas.sh`, which grants us the ability to execute `linPEAS`. `linPEAS` delivers a ton of information; however, since we are focused on escalating our privileges, we focus on `SUID`.
 
 ![result of linPEAS](/images/THM%3A%20Lookup/linpeas1.png)
-![zoomed in](/images/THM%3A%20Lookup/linpeas2.png) <br>
+![zoomed in](/images/THM%3A%20Lookup/linpeas2.png)
+
 *We find an unknown SUID - /usr/sbin/pwn we could probably exploit*
 
 We go to /usr/sbin/pwn and execute it to see what it does.
 
-![pwn](/images/THM%3A%20Lookup/execute.png) <br>
+![pwn](/images/THM%3A%20Lookup/execute.png)
+
 *It runs the id command and then tries to find the password file for that user*
 
 We know that the user `think` has a file called passwords (it was a hidden file).
@@ -217,22 +224,25 @@ It is basically a script that runs the `echo` and `chmod` commands.
 
 And then, when we run `pwm`, we need to make sure our new `id` command is ran by prepending /tmp to $PATH.
 
-![path](/images/THM%3A%20Lookup/path.png) <br>
+![path](/images/THM%3A%20Lookup/path.png)
+
 *Notice how it is structured, it goes into /usr/local/sbin, then /usr/local/bin, and then /usr/sbin, etc.*
 
-![path manipulation](/images/THM%3A%20Lookup/pathmanipulation.png) <br>
+![path manipulation](/images/THM%3A%20Lookup/pathmanipulation.png)
+
 *We prepended /tmp to $PATH - this means the executable `pwn` will go to /tmp first and then look for the executable `id` instead of other places where it is normally found.*
 
 After executing our version of `id`, we get into the password file under the user `think` and we get the password (josemario.AKA(think)).
 
-To login into `think`, we just do `su think`, and then it will prompt us for the password, which we have.
+To log in to `think`, we just do `su think`, and then it will prompt us for the password, which we have.
 
 ```markdown
 su <user>
 Basically means to switch users, switch to <user>
 ```
 
-![logging in as think](/images/THM%3A%20Lookup/loggedin.png) <br>
+![logging in as think](/images/THM%3A%20Lookup/loggedin.png)
+
 *As you can see, we are in as think*
 
 Now, as the user `think`, we can access `user.txt` to solve a part of the room. The next step is to get root access.
@@ -255,7 +265,7 @@ sudo -S /usr/bin/look "" "$LFILE"
 
 ![key](/images/THM%3A%20Lookup/key.png)
 
-Now with the private key, you can just login through SSH. (Create a file with the contents of the key pasted in, and use the -i flag for SSH).
+Now with the private key, you can just log in through SSH. (Create a file with the contents of the key pasted in, and use the -i flag for SSH).
 
 ```markdown
 echo "Key Contents" > key
@@ -269,7 +279,7 @@ ssh -i key root@lookup.thm
 
 Now that we are inside as root, we can find `root.txt`, allowing us to solve the room!
 
-This room was definitely more challenging than the other rooms I have done. There were a lot of things I had to learn, especially with that $PATH manipulation segment. What really made me like this room was that I actually got experience working with Metasploit. The cybersecurity club I joined went over it, but I never really got hands-on experience, and the fact that this room had that segment was a little fun surprise. I also learned how to enumerate for privilege escalation more effectively - using linPEAS literally saved so much time. Lastly, I got to really reinforce my skills with hydra with all the bruteforcing that this room offered.
+This room was definitely more challenging than the other rooms I have done. There were a lot of things I had to learn, especially with that $PATH manipulation segment. What really made me like this room was that I actually got experience working with Metasploit. The cybersecurity club I joined went over it, but I never really got hands-on experience, and the fact that this room had that segment was a little fun surprise. I also learned how to enumerate for privilege escalation more effectively - using linPEAS literally saved so much time. Lastly, I got to really reinforce my skills with Hydra with all the brute-forcing that this room offered.
 
 
 

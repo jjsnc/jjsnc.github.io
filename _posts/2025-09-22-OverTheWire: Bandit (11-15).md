@@ -16,7 +16,7 @@ To find the password, we have to somehow rotate and shift the letters by 13 agai
 tr [ -cds ] [ string1 [ string2 ] ]
 ```
 
-This command is essential in solving this level. `tr` is used to translate or delete characters, specifically, in this use case, you could translate letters found in `string1` to corresponding letters found in `string2`.
+This command is essential in solving this level. `tr` is used to translate or delete characters. Specifically, in this use case, you could translate letters found in `string1` to corresponding letters found in `string2`.
 
 For ROT13, the `tr` command to rotate 13 places is `tr 'A-Za-z' 'N-ZA-Mn-za-m'`.
 
@@ -60,7 +60,7 @@ The `xxd` command creates a hex dump or reverses it.
 ![Further decompression, TAR](/images/OTW%3A%20Bandits%200-15/5-LVL12.png)<br>
 *Further decompression reveals a `tar` file*
 
-![Extracting TAR](/images/OTW%3A%20Bandits%200-15/6-LVL12.png)<br>
+![Extracting TAR](/images/OTW%3A%20Bandits%200-15/6-LVL12.png)
 ```markdown
 tar -xvf [filename] was used to extract the tar archive.
 -x extracts the file from the archive.
@@ -128,45 +128,6 @@ openssl command [ options ... ] [ parameters ... ]
 We pass this level by submitting the password for this current level (what we got from Level 14) through the secure channel.
 
 And that's OverTheWire Bandit Levels 11 - 15. I have learned how to handle different kinds of files, and more importantly, how to communicate and connect to different servers, either by using `nc` and going through raw TCP connections or using `openssl` to establish a TLS handshake to communicate through an encrypted TCP connection.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

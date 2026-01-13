@@ -136,7 +136,7 @@ It is best practice to change these domain-level settings inside their own domai
 To conclude, in this subsection, we learned about how to create OUs within ADUC, how we can structure OUs, move users and workstations from different OUs to new ones, how to make GPOs with Group Policy Management, how they are applied, and how they are classified.
 
 
-
+<a href="/projects/windowsAD/index.html">Back to AD Project's Page</a>
 
 
 

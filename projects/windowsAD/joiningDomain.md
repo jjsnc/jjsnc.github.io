@@ -119,8 +119,7 @@ After you have successfully joined the domain, to log into the domain, we need t
 
 Now do the same for your other client VM (if you have one). And you are basically done. The next step is to organize everything (OUs) and to create Group Policy Objects (GPOs).
 
-
-
+<a href="/projects/windowsAD/index.html">Back to AD Project's Page</a>
 
 
 

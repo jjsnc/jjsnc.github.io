@@ -18,7 +18,7 @@ The first few levels were quite easy, as I already had some sort of basic Linux 
 <h4>[Level 3]</h4> Use ls with the -a flag to find hidden files. Hidden files begin with a "." in front of the file names. For example, to create a hidden file, you would use touch .not\ hidden. - This creates a hidden file called not hidden.
 
 ![Creating a Hidden File](/images/OTW%3A%20Bandits%200-15/CreatingHidden.png)<br>
-*Creating a new Hidden File and using ls -a* <br>
+*Creating a new Hidden File and using ls -a*
 
 <h4>[Level 4]</h4> Use file [filename] to determine the file type of a certain file. This can be used to sort files from generic "gibberish" files. For example, we can differentiate files with ASCII encodings and files with just data.
 

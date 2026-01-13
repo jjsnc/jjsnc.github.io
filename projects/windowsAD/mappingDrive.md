@@ -49,14 +49,10 @@ Now, go into Group Policy Management. Under Employees User GP (or the GPO that y
 
 On the left side, right-click -> New -> Mapped Drive.
 
-Action: Create
-
-Location: Provide the network path, in this case, it would be \\hostname of server\name of folder 
-
-Reconnect: Check it so that the drive reconnects whenever the client logs in
-
-Label as: Simply the name that the drive would appear under
-
+Action: Create <br>
+Location: Provide the network path, in this case, it would be \\hostname of server\name of folder <br>
+Reconnect: Check it so that the drive reconnects whenever the client logs in <br>
+Label as: Simply the name that the drive would appear under <br>
 Drive Letter: Select any. I chose Z
 
 ![sharing](/images/Proj%3A%20AD/share4.png)

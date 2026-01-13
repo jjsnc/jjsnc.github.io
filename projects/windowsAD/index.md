@@ -13,4 +13,5 @@ An extensively documented project that is broken into subparts that will walk yo
   <li><a href="/projects/windowsAD/DCSetup.html">Setting up Windows Server 2022 (AD DS and DNS)</a></li>
   <li><a href="/projects/windowsAD/joiningDomain.html">Creating Users and Joining AD Domain</a></li>
   <li><a href="/projects/windowsAD/creatingOUsAndGPOs.html">Creating Organizational Units (OUs) and Group Policy Objects (GPOs)</a></li>
+  <li><a href="/projects/windowsAD/mappingDrive.html">Creating A Shared Drive Over The Network</a></li>
 </ul>

@@ -31,5 +31,6 @@ Evaluation copies are completely free - however, they do expire - but you can re
 
 Downloading in VM is extremely slow -> download the ISOs and then set them up in VM, if your PC has more cores -> you can always edit the VM to use more cores/memory to speed up the installation process.
 
+<a href="/projects/windowsAD/index.html">Back to AD Project's Page</a>
 
 

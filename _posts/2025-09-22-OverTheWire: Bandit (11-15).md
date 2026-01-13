@@ -29,7 +29,8 @@ NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm
 
 Now, since `tr` uses STDIN, we must feed something into STDIN to get an output. In this case, I used echo with piping to solve this level.
 
-![Echo and Piping](/images/OTW%3A%20Bandits%200-15/Level11.png)<br>
+![Echo and Piping](/images/OTW%3A%20Bandits%200-15/Level11.png)
+
 *Echoing contents of text file to be translated with tr*
 
 <h4>[Level 12]</h4>
@@ -45,19 +46,24 @@ xxd -r [filename]
 
 The `xxd` command creates a hex dump or reverses it.
 
-![Reversing Hexdump](/images/OTW%3A%20Bandits%200-15/1-LVL12.png)<br>
+![Reversing Hexdump](/images/OTW%3A%20Bandits%200-15/1-LVL12.png)
+
 *Reversing the hexdump and outputting it into a file called reverseHexDump*
 
-![Reversing the Reversed Hexdump](/images/OTW%3A%20Bandits%200-15/2-LVL12.png)<br>
+![Reversing the Reversed Hexdump](/images/OTW%3A%20Bandits%200-15/2-LVL12.png)
+
 *Tried to reverse the reversed hexdump for experimentation, didn't work... but found out hexdump was a compressed gzip*
 
-![Decompress with zcat](/images/OTW%3A%20Bandits%200-15/3-LVL12.png)<br>
+![Decompress with zcat](/images/OTW%3A%20Bandits%200-15/3-LVL12.png)
+
 *Decompressing gzip with `zcat` command*
 
-![Decompress with bzcat](/images/OTW%3A%20Bandits%200-15/4-LVL12.png)<br>
+![Decompress with bzcat](/images/OTW%3A%20Bandits%200-15/4-LVL12.png)
+
 *Decompressing bzip2 with `bzcat` command*
 
-![Further decompression, TAR](/images/OTW%3A%20Bandits%200-15/5-LVL12.png)<br>
+![Further decompression, TAR](/images/OTW%3A%20Bandits%200-15/5-LVL12.png)
+
 *Further decompression reveals a `tar` file*
 
 ![Extracting TAR](/images/OTW%3A%20Bandits%200-15/6-LVL12.png)
@@ -68,7 +74,8 @@ tar -xvf [filename] was used to extract the tar archive.
 -f defines the tar archive to extract from.
 ```
 
-![Finale](/images/OTW%3A%20Bandits%200-15/7-LVL12.png)<br>
+![Finale](/images/OTW%3A%20Bandits%200-15/7-LVL12.png)
+
 *After extracting and decompressing, we finally end up with `data8.bin`, a gzip compressed file, which was then decompressed with `zcat`*
 
 <h4>[Level 13]</h4>
@@ -93,7 +100,8 @@ nc [options] hostname port
 
 One option that I discovered that was useful in determining if the connection was successful was `-v`, which prints out the result of `nc`.
 
-![Using nc -v](/images/OTW%3A%20Bandits%200-15/LVL14.png)<br>
+![Using nc -v](/images/OTW%3A%20Bandits%200-15/LVL14.png)
+
 *Using the `nc -v` command to connect to a TCP port*
 
 Now, in the TCP port, we just need to paste in the password found in `/etc/bandit_pass/bandit14` to get to the next level. This can be done with basic traversal using `cd`
@@ -110,7 +118,8 @@ Without SSL/TLS, data that is sent in plain text can easily be seen/sniffed. For
 
 The interaction between the client and server is usually done in a TLS handshake. This is where the client and server establish guidelines on how data should be encrypted, authenticating and verifying identity, and establishing session keys.
 
-![Cloudflare's Explanation of TLS Handshake](/images/OTW%3A%20Bandits%200-15/Cloudflare.png)<br>
+![Cloudflare's Explanation of TLS Handshake](/images/OTW%3A%20Bandits%200-15/Cloudflare.png)
+
 *Credit to [Cloudflare](https://www.cloudflare.com/learning/ssl/what-happens-in-a-tls-handshake)*
 
 Now, to open a secure communications channel, we have to use the `openssl` command.
@@ -119,7 +128,8 @@ Now, to open a secure communications channel, we have to use the `openssl` comma
 openssl command [ options ... ] [ parameters ... ]
 ```
 
-![OpenSSL cmd demo](/images/OTW%3A%20Bandits%200-15/LVL15New.png)<br>
+![OpenSSL cmd demo](/images/OTW%3A%20Bandits%200-15/LVL15New.png)
+
 *Using the `openssl` command to connect securely*
 
 `s_client` is a subcommand of openssl to test SSL/TLS connections <br>

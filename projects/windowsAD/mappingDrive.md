@@ -7,7 +7,7 @@ author: Jason Chan
 
 ## Security Group Creation
 
-In simpler terms, mapping a drive in AD is basically creating a network folder (e.g., \\Server\Share) and mapping that folder to a specific drive letter (e.g., Z:), which appears in the user's computer. This allows resources on the network to be centrally managed and accessed.
+In simpler terms, mapping a drive in AD is basically creating a network folder (e.g., `\\Server\Share`) and mapping that folder to a specific drive letter (e.g., Z:), which appears in the user's computer. This allows resources on the network to be centrally managed and accessed.
 
 To create a mapped drive for a specific group like `Employees`, we need to create that `Security Group` within Active Directory Users and Computers (ADUC). This is because we cannot share folders directly to OUs; we must share them to a `Security Group`.
 

@@ -6,7 +6,7 @@ author: Jason Chan
 # Windows Active Directory (AD) Lab
 An extensively documented project that is broken into subparts that will walk you through how to implement a basic Windows Active Directory Homelab - starting with an introduction, setups, joining the AD Domain, creating OUs and GPOs, and mapping drives.
 
-## Subparts (UNDER CONSTRUCTION)
+## Subparts
 
 <ul>
   <li><a href="/projects/windowsAD/introduction.html">Introduction and What Is Needed</a></li>

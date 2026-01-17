@@ -4,3 +4,6 @@ description: Documenting what I learn - Labs, CTFs, etc.
 markdown: kramdown
 kramdown:
   input: GFM
+collections:
+  ctf:
+    output: true

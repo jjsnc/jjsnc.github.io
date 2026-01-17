@@ -18,7 +18,7 @@ title: Home
 </ul>
 
 
-## CTF Writeups (under construction, will probably change to posts about specific writeups)
+## CTF Writeups (under construction)
 <ul>
   {% for writeup in site.ctf %}
     <li>

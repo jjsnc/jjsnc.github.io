@@ -18,13 +18,13 @@ title: Home
 </ul>
 
 
-## CTFs (under construction, will probably change to posts about specific writeups)
+## CTF Writeups (under construction, will probably change to posts about specific writeups)
 <ul>
-  {% for ctf in site.data.ctfs %}
+  {% for writeup in site.ctf %}
     <li>
-      <span style="color: #393939;">{{ ctf.name }}</span> - {{ ctf.date | date: "%b %d, %Y" }}
-      {% if ctf.focus %}
-        <br><span style="font-size: 0.85em;">Focus: {{ ctf.focus | join: ", " }}</span>
+      <a href="{{ writeup.url }}">{{ writeup.event }}: {{ writeup.title }}</a> - {{ writeup.date | date: "%b %d, %Y" }}
+      {% if writeup.tags %}
+        <br><span style="font-size: 0.85em;">Focus: {{ writeup.tags | join: ", " }}</span>
       {% endif %}
     </li>
   {% endfor %}

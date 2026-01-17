@@ -22,7 +22,7 @@ title: Home
 <ul>
   {% for writeup in site.ctf %}
     <li>
-      <a href="{{ writeup.url }}">{{ writeup.event }}: {{ writeup.title }}</a> - {{ writeup.date | date: "%b %d, %Y" }}
+      <a href="{{ writeup.url }}">{{ writeup.title }}</a> - {{ writeup.date | date: "%b %d, %Y" }}
       {% if writeup.tags %}
         <br><span style="font-size: 0.85em;">Focus: {{ writeup.tags | join: ", " }}</span>
       {% endif %}

@@ -1,4 +1,9 @@
 - name: "Windows AD Lab"
   url: "/projects/windowsAD/"
   range: "Dec 2025 - Jan 2026"
+
+- name: "Firewall and Network Segmentation Lab"
+  url: "/projects/pfSense/"
+  range: "Dec 2025 - Present"
   
+

@@ -7,7 +7,7 @@ author: Jason Chan
 
 ## Installing pfSense/Netgate Installer ISO File
 
-Before we even do anything, we must install the necessary software. Search up `pfSense` on your browser and locate the `Netgate Installer`. Previous versions of `pfSense` did not require an installer; however, for the most up-to-date `pfSense CE` (Community Edition), you must create an account on `Netgate` to download it. If you do not wish to create an account, you can get outdated versions of pfSense from this [mirror](https://atxfiles.netgate.com/mirror/downloads/).
+Before we even do anything, we must install the necessary software. Search for `pfSense` on your browser and locate the `Netgate Installer`. Previous versions of `pfSense` did not require an installer; however, for the most up-to-date `pfSense CE` (Community Edition), you must create an account on `Netgate` to download it. If you do not wish to create an account, you can get outdated versions of pfSense from this [mirror](https://atxfiles.netgate.com/mirror/downloads/).
 
 I personally got the ISO version because I will be installing pfSense onto a virtual machine with VMware.
 
@@ -34,7 +34,7 @@ After creating the new VM and everything works, you should see the `Netgate Inst
 
 The WAN (Wide Area Network) is already active due to `NAT` from our hypervisor, providing an upstream connection to the pfSense VM. 
 
-Our task is to install pfSense onto the LAN (Local Area Network) interface, which is the currently inactive one (since we have yet to set it up). We will be essentially configuring the LAN interface since this represents the network that pfSense will protect.
+Our task is to install pfSense onto the `LAN (Local Area Network)` interface, which is the currently inactive one (since we have yet to set it up). We will be essentially configuring the LAN interface since this represents the network that pfSense will protect.
 
 Follow through with the installation:
 
@@ -82,7 +82,7 @@ The LAN will represent our internal network; we must add another network adaptor
 
 ## Setting A Static IP Address for LAN Interface
 
-Now, in pfSense, we need to configure the IP address for em1, which will serve as our LAN interface. This is necessary because the LAN is the default gateway for all internal hosts. If our LAN didn't have a static IP address, hosts behind the firewall may have trouble routing traffic to the Internet, and vice versa. 
+Now, in pfSense, we need to configure the IP address for `em1`, which will serve as our LAN interface. This is necessary because the LAN is the default gateway for all internal hosts. If our LAN didn't have a static IP address, hosts behind the firewall may have trouble routing traffic to the Internet, and vice versa. 
 
 Additionally, having a static IP address means firewall rules and routing policies always apply to the same subnet.
 
@@ -102,12 +102,12 @@ Inside the pfSense console, we have the ability to configure our interfaces.
 
 ![configuring pfSense](/images/Proj%3A%20pfSense/static5.png)
 
-Summary of Pictures:
-1. Say No to DHCP - since we want a static IP Address for our LAN
+`Summary of Pictures`:
+1. Say `No to DHCP` - since we want a static IP Address for our LAN
 2. Set new LAN IPV4 Address: `10.10.10.2`
-3. Subnet Mask = 24 (255.255.255.0), this means we have 254 available IP addresses to assign to hosts in this subnet
+3. `Subnet Mask = 24 (255.255.255.0)`, this means we have 254 available IP addresses to assign to hosts in this subnet
 4. No Upstream Gateway Address for LAN (Upstream Gateway is the next-hop address to reach another network)
-5. Start a DHCP Server for the LAN Interface (hosts that join the subnet will be dynamically assigned an IP address)
+5. Start a `DHCP Server` for the LAN Interface (hosts that join the subnet will be dynamically assigned an IP address)
 
 After we have finished configuring our LAN interface, we can then access the web configurator through `10.10.10.2`. Of course, we need to move hosts into the subnet (and behind the firewall). This step will be in my next post on [migrating my AD domain behind a firewall](https://jjsnc.github.io/projects/pfSense/migrating.html).
 

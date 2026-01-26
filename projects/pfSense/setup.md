@@ -94,13 +94,23 @@ Inside the pfSense console, we have the ability to configure our interfaces.
 
 ![configuring pfSense](/images/Proj%3A%20pfSense/static.png)
 
+*Set the static IP address, and decide on the subnet mask*
+
 ![configuring pfSense](/images/Proj%3A%20pfSense/static2.png)
+
+*Select Yes to start a DHCP Server within the LAN*
 
 ![configuring pfSense](/images/Proj%3A%20pfSense/static3.png)
 
+*Provide a range for IP addresses for DHCP to assign new hosts*
+
 ![configuring pfSense](/images/Proj%3A%20pfSense/static4.png)
 
+*Web configurator can be accessed through the static IP address we have just set*
+
 ![configuring pfSense](/images/Proj%3A%20pfSense/static5.png)
+
+*Finished Setup*
 
 `Summary of Pictures`:
 1. Say `No to DHCP` - since we want a static IP Address for our LAN

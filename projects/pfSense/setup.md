@@ -80,17 +80,36 @@ The LAN will represent our internal network; we must add another network adaptor
 
 *After rebooting the pfSense console VM, you should see your WAN and LAN interfaces. You can ignore OPT1 here. I created a VLAN (virtual LAN) by just experimenting and have no idea what I really want to do with it just yet*
 
+## Setting A Static IP Address for LAN Interface
 
+Now, in pfSense, we need to configure the IP address for em1, which will serve as our LAN interface. This is necessary because the LAN is the default gateway for all internal hosts. If our LAN didn't have a static IP address, hosts behind the firewall may have trouble routing traffic to the Internet, and vice versa. 
 
+Additionally, having a static IP address means firewall rules and routing policies always apply to the same subnet.
 
+Inside the pfSense console, we have the ability to configure our interfaces.
 
+![configuring pfSense](/images/Proj%3A%20pfSense/result.png)
 
+*Select option 2 to Set interfaces(s) IP address, and then select LAN (em1)*
 
+![configuring pfSense](/images/Proj%3A%20pfSense/static.png)
 
+![configuring pfSense](/images/Proj%3A%20pfSense/static2.png)
 
+![configuring pfSense](/images/Proj%3A%20pfSense/static3.png)
 
+![configuring pfSense](/images/Proj%3A%20pfSense/static4.png)
 
+![configuring pfSense](/images/Proj%3A%20pfSense/static5.png)
 
+Summary of Pictures:
+1. Say No to DHCP - since we want a static IP Address for our LAN
+2. Set new LAN IPV4 Address: `10.10.10.2`
+3. Subnet Mask = 24 (255.255.255.0), this means we have 254 available IP addresses to assign to hosts in this subnet
+4. No Upstream Gateway Address for LAN (Upstream Gateway is the next-hop address to reach another network)
+5. Start a DHCP Server for the LAN Interface (hosts that join the subnet will be dynamically assigned an IP address)
+
+After we have finished configuring our LAN interface, we can then access the web configurator through `10.10.10.2`. Of course, we need to move hosts into the subnet (and behind the firewall). This step will be in my next post on [migrating my AD domain behind a firewall](https://jjsnc.github.io/projects/pfSense/migrating.html).
 
 
 <a href="/projects/pfSense/index.html">Back to pfSense Project's Page</a>

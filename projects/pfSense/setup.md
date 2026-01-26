@@ -3,9 +3,7 @@ title: "Firewall and Network Segmentation Lab"
 author: Jason Chan
 ---
 
-# Migrating an Active Directory Domain Behind a pfSense Firewall
-
-I will be assuming that you have an existing Active Directory Domain and that you would like to put a firewall between the domain and the Internet. However, if you do not have an existing Active Directory Domain, you can check out my [previous project](https://jjsnc.github.io/projects/windowsAD/) to build one from scratch, or you may follow along with just pfSense and a Windows 11 client (specific steps will differ, but general procedures will likely be similar).
+# Setting Up pfSense
 
 ## Installing pfSense/Netgate Installer ISO File
 
@@ -58,7 +56,34 @@ After the installation is complete, you should see the pfSense console, which lo
 
 ![pfSense console](/images/Proj%3A%20pfSense/pfconsole.png)
 
-to be continued
+From the picture, we see that we have an IP address for our WAN (assigned by DHCP); however, we are missing our LAN. This is because when we created our VM, only one virtual NIC (network interface card) was created (by NAT).
+
+The LAN will represent our internal network; we must add another network adaptor to create a LAN. To do this, we must go into the VM settings and add another network adapter. Follow along!
+
+![adding new network adapter](/images/Proj%3A%20pfSense/NIC.png)
+
+*Click Add near the bottom*
+
+![adding new network adapter](/images/Proj%3A%20pfSense/NIC2.png)
+
+*Select Network Adaptor*
+
+![adding new network adapter](/images/Proj%3A%20pfSense/NIC3.png)
+
+*Select LAN segment, and proceed to name your LAN*
+
+![adding new network adapter](/images/Proj%3A%20pfSense/NIC4.png)
+
+*Finally, select your newly created LAN segment*
+
+![Final Result](/images/Proj%3A%20pfSense/result.png)
+
+*After rebooting the pfSense console VM, you should see your WAN and LAN interfaces. You can ignore OPT1 here. I created a VLAN (virtual LAN) by just experimenting and have no idea what I really want to do with it just yet*
+
+
+
+
+
 
 
 

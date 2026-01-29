@@ -127,9 +127,100 @@ Notice how DNS points to our new DC IP address, `10.10.10.25`, the IPv4 address 
 
 *Testing ping on the client Windows VM -> it is connected to the internet while being behind the firewall*
 
+Now, let's move Jane behind the firewall.
 
-placeholder - to be continued
+![moving jane](/images/Proj%3A%20pfSense/jane.png)
 
+*Before migration, notice that the DNS still points to the old DC IP address. Also, pfSense's DHCP gave Jane 10.10.10.101*
+
+Now, we just do the exact same steps that we did for John... however, we encounter a problem.
+
+![moving jane](/images/Proj%3A%20pfSense/jane2.png)
+
+Somehow, Jane is still under the `GPO` restrictions even though I have unlinked them. Looks like we cannot access the network settings this way. 
+
+One way we can circumvent this is to log into Jane's computer using the local administrator account.
+
+![moving jane](/images/Proj%3A%20pfSense/jane3.png)
+
+*Using .\[local account username] and the original password that was used to set up the workstation*
+
+![moving jane](/images/Proj%3A%20pfSense/jane4.png)
+
+*We can then change the DNS server preference on the local administrator account*
+
+![moving jane](/images/Proj%3A%20pfSense/jane5.png)
+
+*Logging back into the domain account, we now run ipconfig /all and see that the changes were applied*
+
+## After Migration
+
+After migrating both the DC and Domain Users behind the firewall, I relinked the GPOs within Group Policy Management inside the AD+DNS Server VM.
+
+![relinking GPO to enforce rules](/images/Proj%3A%20pfSense/relink.png)
+
+*Was temporarily disabled/unlinked, now relinked to enforce GPOs once again*
+
+![update GPO](/images/Proj%3A%20pfSense/relink2.png)
+
+*Running gpupdate /force on John -> seems like John can see the DC now, implying our domain is back up*
+
+![update GPO](/images/Proj%3A%20pfSense/relink3.png)
+
+*Running gpupdate /force on Jane, same result*
+
+We have successfully migrated our AD domain behind the pfSense firewall.
+
+## Summary / Current Network Topography
+
+<table>
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Interface</th>
+      <th>IP Address</th>
+      <th>Subnet</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>pfSense</td>
+      <td>LAN</td>
+      <td>10.10.10.2</td>
+      <td>10.10.10.0/24</td>
+      <td>Default gateway for LAN</td>
+    </tr>
+    <tr>
+      <td>pfSense</td>
+      <td>WAN</td>
+      <td>DHCP</td>
+      <td>Upstream ISP</td>
+      <td>Internet access</td>
+    </tr>
+    <tr>
+      <td>Domain Controller</td>
+      <td>Ethernet</td>
+      <td>10.10.10.25</td>
+      <td>10.10.10.0/24</td>
+      <td>AD DS + DNS</td>
+    </tr>
+    <tr>
+      <td>Windows 11 (John)</td>
+      <td>Ethernet</td>
+      <td>10.10.10.100</td>
+      <td>10.10.10.0/24</td>
+      <td>Domain Client</td>
+    </tr>
+    <tr>
+      <td>Windows 11 (Jane)</td>
+      <td>Ethernet</td>
+      <td>10.10.10.101</td>
+      <td>10.10.10.0/24</td>
+      <td>Domain Client</td>
+    </tr>
+  </tbody>
+</table>
 
 
 

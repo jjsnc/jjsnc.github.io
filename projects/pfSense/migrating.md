@@ -47,7 +47,51 @@ Knowing that the DC can reach the default gateway `10.10.10.2`, we can go into t
 
 *After going through the Web Configurator and leaving settings as default/recommended, we arrive at the homepage*
 
-PLACEHOLDER - CONTINUE HERE
+Now, let's run a few tests...
+
+![running a few ping tests](/images/Proj%3A%20pfSense/test.png)
+
+*Pinging the gateway from DC works; however, it looks like our DC cannot reach the Internet (pinging `8.8.8.8` fails)*
+
+What I tried to fix this was to add a routing gateway within the Web Configurator.
+
+![adding a gateway](/images/Proj%3A%20pfSense/routing.png)
+
+*Systems -> Routing*
+
+![adding a gateway](/images/Proj%3A%20pfSense/routing2.png)
+
+*Add new gateway*
+
+![adding a gateway](/images/Proj%3A%20pfSense/routing3.png)
+
+*Configuring gateway settings*
+
+![adding a gateway](/images/Proj%3A%20pfSense/routing4.png)
+
+*Applying the changes*
+
+However, this did not fix the problem. Instead, we get a different error, which hints at an infinite loop within the network. By adding the LAN gateway, we are basically telling all traffic leaving the LAN to route to `10.10.10.2`, which is the pfSense LAN interface, basically a self-referential loop. I decided to delete our newly created gateway since that did not help.
+
+![adding a gateway](/images/Proj%3A%20pfSense/routing5.png)
+
+After looking browsing around, I went back to the pfSense console, and that is when I realized:
+
+![console misconfig](/images/Proj%3A%20pfSense/solution1.png)
+
+The `em0` or `WAN` interface is not assigned to anything, which explains why we are not connected to the internet since the `WAN` interface is the path to the `Internet`.
+
+![WAN backup](/images/Proj%3A%20pfSense/solution2.png)
+
+*After resetting and configuring the WAN interface, it has an IP address now*
+
+![WAN backup](/images/Proj%3A%20pfSense/solution3.png)
+
+*Back in the Web Configurator, we see the Internet symbol appear next to our WAN gateway*
+
+![WAN backup](/images/Proj%3A%20pfSense/solution4.png)
+
+*Pinging 8.8.8.8 works now - we are connected to the Internet*
 
 ## Migrating Windows 11 Domain Users
 
@@ -63,7 +107,29 @@ After migrating the DC, we also need to migrate the domain users `John Doe` and 
 
 However, we run into this problem of policies failing to update... We moved our DC, which means Active Directory breaks because client VMs are still using the previous static IP address of the DC to resolve `DNS` lookups. To fix this, we need to assign the preferred DNS server to `10.10.10.25` (where the DC currently is).
 
-PLACEHOLDER - CONTINUE HERE
+We need to go into Settings -> Network & Internet -> Ethernet.
+
+![dns reassignment](/images/Proj%3A%20pfSense/reassign.png)
+
+*Notice how the DNS server points to our old AD+DNS server's IP address*
+
+![dns reassignment](/images/Proj%3A%20pfSense/reassign2.png)
+
+*Changing requires administrator privileges, log in with the user `administrator` and the password you used to sign into the Windows Server 2022 administrator account*
+
+![dns reassignment](/images/Proj%3A%20pfSense/reassign3.png)
+
+![dns reassignment](/images/Proj%3A%20pfSense/reassign4.png)
+
+Notice how DNS points to our new DC IP address, `10.10.10.25`, the IPv4 address of the current host (assigned by pfSense's DHCP upon joining the LAN, ranging from 10.10.10.100 to 10.10.10.254), and the default gateway being the pfSense LAN interface, `10.10.10.2`.
+
+![dns reassignment](/images/Proj%3A%20pfSense/reassign5.png)
+
+*Testing ping on the client Windows VM -> it is connected to the internet while being behind the firewall*
+
+
+placeholder - to be continued
+
 
 
 

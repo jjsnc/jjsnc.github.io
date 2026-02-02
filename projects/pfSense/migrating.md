@@ -143,7 +143,7 @@ One way we can circumvent this is to log into Jane's computer using the local ad
 
 ![moving jane](/images/Proj%3A%20pfSense/jane3.png)
 
-*Using .\[local account username] and the original password that was used to set up the workstation*
+*Using `.\[local account username]` and the original password that was used to set up the workstation*
 
 ![moving jane](/images/Proj%3A%20pfSense/jane4.png)
 

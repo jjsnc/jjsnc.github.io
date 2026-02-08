@@ -81,7 +81,7 @@ I went to the pfSense Web Configurator through the DC VM, changed `OPT1` (em2) t
 
 *nslookup works -> AD Domain can be reached*
 
-However, pinging 8.8.8.8 still fails. This is because the rule that we have made only works for `USER_NET -> LAN`. We have yet to do anything for `USER_NET -> WAN`.
+However, pinging 8.8.8.8 still fails. This is because the rule that we have made only works for `USER_NET -> LAN`. We have yet to configure `USER_NET -> WAN` routing.
 
 We can edit the rule to allow the destination to be `ANY`, allowing `USER_NET` to pass traffic to any network. This works, as seen by the image below - pinging 8.8.8.8 now works, but this definitely leaves a few security risks, which I will address in another post on hardening network security.
 
@@ -91,7 +91,7 @@ We can edit the rule to allow the destination to be `ANY`, allowing `USER_NET` t
 
 ## Summary
 
-Segmented our original flat network by separating infrastructure and users. Domain Users are now in `USER_NET (10.10.20.0/24)`, while infrastructure (DC Servr) is in `LAN (10.10.10.0/24)`. Ran into issues with outbound traffic from `USER_NET`, which was resolved by creating a Firewall Rule that allowed traffic from `USER_NET` to the LAN and WAN.
+Segmented our original flat network by separating infrastructure and users. Domain Users are now in `USER_NET (10.10.20.0/24)`, while infrastructure (DC Server) is in `LAN (10.10.10.0/24)`. Ran into issues with outbound traffic from `USER_NET`, which was resolved by creating a Firewall Rule that allowed traffic from `USER_NET` to the LAN and WAN.
 
 ```markdown
 After Segmentation: Network Topography

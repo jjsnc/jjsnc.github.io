@@ -12,4 +12,5 @@ A walkthrough and step-by-step guide for migrating an existing Active Directory 
   <li><a href="/projects/pfSense/introduction.html">Introduction to Firewalls</a></li>
   <li><a href="/projects/pfSense/setup.html">Setting up pfSense</a></li>
   <li><a href="/projects/pfSense/migrating.html">Migrating My AD Domain Behind A Firewall</a></li>
+  <li><a href="/projects/pfSense/segmentation.html">Segmenting Our AD Domain</a></li>
 </ul>

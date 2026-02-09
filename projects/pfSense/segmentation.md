@@ -83,7 +83,7 @@ I went to the pfSense Web Configurator through the DC VM, changed `OPT1` (em2) t
 
 However, pinging 8.8.8.8 still fails. This is because the rule that we have made only works for `USER_NET -> LAN`. We have yet to configure `USER_NET -> WAN` routing.
 
-We can edit the rule to allow the destination to be `ANY`, allowing `USER_NET` to pass traffic to any network. This works, as seen by the image below - pinging 8.8.8.8 now works, but this definitely leaves a few security risks, which I will address in another post on hardening network security.
+We can edit the rule to allow the destination to be `ANY`, allowing `USER_NET` to pass traffic to any network. This works, as seen by the image below - pinging 8.8.8.8 now works, but this definitely leaves a few security risks, which I will address in another post on [hardening network security](https://jjsnc.github.io/projects/pfSense/security.html).
 
 ![USER_NET Rules](/images/Proj%3A%20pfSense/rules5.png)
 

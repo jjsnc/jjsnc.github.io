@@ -93,12 +93,37 @@ Rule order is critical - the allow rule for DC traffic must precede the deny rul
 1. Allow `USER_NET -> LAN (DC on AD Ports)` to ensure AD functionality
 2. Block `USER_NET -> LAN (except DC)` to prevent users from interacting with infrastructure other than DC
 3. Allow `USER_NET -> WAN` for Internet Access
-4. Restrict `USER_NET` to Anything else for Implicit Deny
+4. Restrict `USER_NET` for everything else for Implicit Denial
 
 ## Securing USER_NET Internet Access
 
-placeholder
+pfSense has a default `WAN` rule that blocks all incoming traffic. However, we do not have any rules in place for outbound traffic from `USER_NET -> WAN (Internet)`. This means users can initiate connections to any external service on any port. This unrestricted access allows compromised devices to exfiltrate sensitive data, connect to command-and-control servers, or bypass security measures (tunneling traffic over open ports).
 
+I have created another alias called `ALLOWED_OUTBOUND_PORTS` consisting of ports necessary to browse the Internet.
+
+![alias for outbound](/images/Proj%3A%20pfSense/outbound.png)
+
+*Allowing HTTP/HTTPS, DNS, and NTP*
+
+Now, I have restricted WAN (Internet) access to only allow the ports defined in `ALLOWED_OUTBOUND_PORTS`, permitting just the necessary services for browsing, DNS resolution, and time synchronization.
+
+![most recent rule](/images/Proj%3A%20pfSense/newrule.png)
+
+We can test our newly configured firewall rule.
+
+Logging in as a client machine on `10.10.20.0/24`, I will run PowerShell on `John-PC` and use the `Test-NetConnection` command.
+
+![testing 443 and 80 port](/images/Proj%3A%20pfSense/porttest.png)
+
+*Successfully connected to Google on ports 80 (HTTP) and 443 (HTTPS), demonstrating that users can access these ports*
+
+![testing 22 port](/images/Proj%3A%20pfSense/porttest2.png)
+
+*Failed to establish a connection to GitHub's port 22 (SSH), demonstrating that outbound traffic to non-approved ports is blocked*
+
+![normal](/images/Proj%3A%20pfSense/porttest3.png)
+
+*Successful connection to GitHub from my host computer (outside the VM) to demonstrate that GitHub does have an open port on 22 and is listening for SSH; this means that the previous failure was due to the firewall rather than the destination being unavailable*
 
 
 

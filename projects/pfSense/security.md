@@ -63,15 +63,15 @@ Note: It is redundant to block `port 80` and `port 443`, but I am doing it more 
 
 ## Aliasing and Hardening USER_NET -> LAN (INFRA_NET)
 
-Aliasing in pfSense provides abstraction by allowing firewall rules to reference logical objects instead of hardcoded IP addresses, networks, or ports. This improves rule readability and maintainability.
+Aliasing in pfSense provides `abstraction` by allowing firewall rules to reference logical objects instead of hardcoded IP addresses, networks, or ports. This improves rule readability and maintainability.
 
-To harden traffic between `USER_NET` and `LAN (INFRA_NET)`, I created two aliases, `DC_SERVER` and `AD_REQUIRED_PORTS`. The objective is to enforce the `Principle of Least Privilege` by restricting USER_NET access to only specific Active Directory services required for normal domain operations.
+To harden traffic between `USER_NET` and `LAN (INFRA_NET)`, I created two aliases, `DC_SERVER` and `AD_REQUIRED_PORTS`. The objective is to enforce the `Principle of Least Privilege` by restricting `USER_NET` access to only specific `Active Directory` services required for normal domain operations.
 
 ![alias](/images/Proj%3A%20pfSense/alias.png)
 
 <ul>
-      <li>DC_SERVER references the IP address of the DC (Domain Controller)</li>
-      <li>AD_REQUIRED_PORTS contains the set of ports required for essential AD services</li>
+      <li><code>DC_SERVER</code> references the IP address of the DC (Domain Controller)</li>
+      <li><code>AD_REQUIRED_PORTS</code> contains the set of ports required for essential AD services</li>
 </ul>
 
 | Port Range    | Protocol | Service              | Function                           |
@@ -90,10 +90,10 @@ With Aliasing done, we can make a set of rules to enforce the `Principle of Leas
 
 Rule order is critical - the allow rule for DC traffic must precede the deny rule to LAN, as pfSense evaluates rules top-down.
 
-1. Allow USER_NET -> LAN (DC on AD Ports) to ensure AD functionality
-2. Block USER_NET -> LAN (except DC) to prevent users from interacting with infrastructure other than DC
-3. Allow USER_NET -> WAN for Internet Access
-4. Restrict USER_NET to Anything else for Implicit Deny
+1. Allow `USER_NET -> LAN (DC on AD Ports)` to ensure AD functionality
+2. Block `USER_NET -> LAN (except DC)` to prevent users from interacting with infrastructure other than DC
+3. Allow `USER_NET -> WAN` for Internet Access
+4. Restrict `USER_NET` to Anything else for Implicit Deny
 
 ## Securing USER_NET Internet Access
 

@@ -93,7 +93,7 @@ We can edit the rule to allow the destination to be `ANY`, allowing `USER_NET` t
 
 Segmented our original flat network by separating infrastructure and users. Domain Users are now in `USER_NET (10.10.20.0/24)`, while infrastructure (DC Server) is in `LAN (10.10.10.0/24)`. Ran into issues with outbound traffic from `USER_NET`, which was resolved by creating a Firewall Rule that allowed traffic from `USER_NET` to the LAN and WAN.
 
-```markdown
+<pre>
 After Segmentation: Network Topography
 
 Internet (WAN)
@@ -109,7 +109,7 @@ LAN:
 
 USER_NET:
   └─ Domain Users
-```
+</pre>
 
 <a href="/projects/pfSense/index.html">Back to pfSense Project's Page</a>
 

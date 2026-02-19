@@ -125,6 +125,25 @@ Logging in as a client machine on `10.10.20.0/24`, I will run PowerShell on `Joh
 
 *Successful connection to GitHub from my host computer (outside the VM) to demonstrate that GitHub does have an open port on 22 and is listening for SSH; this means that the previous failure was due to the firewall rather than the destination being unavailable*
 
+## Summary
+
+In this section, I have hardened our network security by implementing firewall controls in pfSense to enforce segmentation, reduce the attack surface, and limit lateral movement.
+
+We started by assuming that endpoints in `USER_NET` (10.10.20.0/24) may be compromised (through phishing, malware, etc). This led me to introduce firewall rules to limit lateral movement and reduce attack vectors while maintaining domain functionality.
+
+Key Actions:
+
+<ul>
+      <li>Restricting pfSense Web GUI on <code>USER_NET</code> to reduce management-plane exposure</li>
+      <li>Creating pfSense Aliases to improve firewall rule clarity and maintainability</li>
+      <li>Enforcing <code>Principle of Least Privilege</code> by limiting traffic from <code>USER_NET</code> to <code>LAN</code> to only required Active Directory ports for the Domain Controller (DC)</li>
+      <li>Limiting outbound Internet Access from <code>USER_NET</code> to only essential services (DNS, HTTPS, HTTP) needed for Internet browsing to reduce exfiltration and command-and-control risk</li>
+</ul>
+
+
+
+
+
 
 
 

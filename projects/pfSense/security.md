@@ -3,7 +3,7 @@ title: "Firewall and Network Segmentation Lab"
 author: Jason Chan
 ---
 
-# Network Security and Firewall Rules (under construction)
+# Network Security and Firewall Rules
 
 This post will revolve around hardening our network security by introducing Firewall Rules to control traffic between subnets, protect infrastructure, and limit potential attack vectors.
 
